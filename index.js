@@ -43,10 +43,16 @@ app.get("/cart", async (req,res)=>{
 
 
 app.delete("/cart/:id", async(req,res)=>{
-  await Cart.deleteOne({_id:req.params.id});
+  await Cart.deleteOne(req.params);
   res.send("delete successful")
 })
 
+
+app.put("/cart/:id", async(req,res)=>{
+  await Cart.updateOne(req.params,{$set:req.body});
+  let cart= await Cart.find(req.params);
+  return res.json(cart)
+})
 
 
 
