@@ -18,7 +18,8 @@ const cartSchema= new mongoose.Schema({
     title:String,
     desc:String,
     price:String,
-    id:String
+    id:String,
+    qty:Number
 })
 
 const Cart = mongoose.model("cart",cartSchema)
