@@ -1,5 +1,5 @@
 const express= require("express");
-const {Menu,connection} = require("./db.js");
+const {Menu,Cart,connection} = require("./db.js");
 const cors =require("cors")
 
 
@@ -28,6 +28,27 @@ app.get("/menu", async (req,res)=>{
   let items= await Menu.find(query);
   res.json(items);
 })
+
+
+app.post("/cart",async (req,res)=>{
+  await Cart.insertMany(req.body);
+  return res.status(201).send("cart added")
+})
+
+app.get("/cart", async (req,res)=>{
+  let cart= await Cart.find();
+  return res.json(cart);
+})
+
+
+
+app.delete("/cart/:id", async(req,res)=>{
+  await Cart.deleteOne({_id:req.params.id});
+  res.send("delete successful")
+})
+
+
+
 
 const PORT =process.env.PORT||8080
 app.listen(PORT, async ()=>{

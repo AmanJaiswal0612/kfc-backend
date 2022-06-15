@@ -13,4 +13,14 @@ const menuSchema= new mongoose.Schema({
 const Menu= mongoose.model("menu",menuSchema)
 
 
-module.exports= {Menu,connection}
+const cartSchema= new mongoose.Schema({
+    image:String,
+    title:String,
+    desc:String,
+    price:String,
+    id:String
+})
+
+const Cart = mongoose.model("cart",cartSchema)
+
+module.exports= {Menu,Cart,connection}
