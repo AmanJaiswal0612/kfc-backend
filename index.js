@@ -49,6 +49,10 @@ app.delete("/cart/:id", async(req,res)=>{
 
 
 app.put("/cart/:id", async(req,res)=>{
+  if(req.body.qty===0){
+    await Cart.deleteOne(req.params);
+    return res.send("cart is empty")
+  }
   await Cart.updateOne(req.params,{$set:req.body});
   let cart= await Cart.find(req.params);
   return res.json(cart)
