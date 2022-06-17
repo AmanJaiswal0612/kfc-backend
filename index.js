@@ -30,6 +30,13 @@ app.get("/menu", async (req,res)=>{
 })
 
 
+app.get("/menu/:id", async(req,res)=>{
+  let {id}= req.params;
+  let only= await Menu.find({_id:id});
+  return res.json(only);
+})
+
+
 app.post("/cart",async (req,res)=>{
   await Cart.insertMany(req.body);
   return res.status(201).send("cart added")
@@ -57,6 +64,9 @@ app.put("/cart/:id", async(req,res)=>{
   let cart= await Cart.find(req.params);
   return res.json(cart)
 })
+
+
+
 
 
 
